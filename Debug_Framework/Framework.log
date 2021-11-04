@@ -12,7 +12,6 @@
   Math.cpp
   Path.cpp
   String.cpp
-  Xml.cpp
   Orthographic.cpp
   Perspective.cpp
   Projection.cpp
