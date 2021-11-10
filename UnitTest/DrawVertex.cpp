@@ -37,4 +37,8 @@ void DrawVertex::Render()
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 
 	shader->Draw(0, 0, 2);
-}
+	
+	ImGui::Text("FPS : %f", Time::Get()->FPS());
+	ImGui::Text("Vertices[%d]: %f, %f, %f", vertices[0].Position, vertices[1].Position, vertices[2].Position);
+	//ImGui::Text("FPS : %f", Time::Get()->FPS());
+}	

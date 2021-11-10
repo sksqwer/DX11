@@ -19,6 +19,7 @@ WPARAM Window::Run(IExecute * main)
 	Time::Get()->Start();
 
 	Gui::Create();
+	Context::Create();
 
 	mainExecute->Initialize();
 
@@ -42,6 +43,7 @@ WPARAM Window::Run(IExecute * main)
 	}
 	mainExecute->Destroy();
 
+	Context::Delete();
 	Gui::Delete();
 	Time::Delete();
 	Mouse::Delete();
