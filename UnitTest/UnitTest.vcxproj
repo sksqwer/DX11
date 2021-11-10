@@ -125,9 +125,11 @@
   <ItemGroup>
     <ClInclude Include="..\Framework\Main.h" />
     <ClInclude Include="..\Framework\Stdafx.h" />
+    <ClInclude Include="DrawVertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Framework\Main.cpp" />
+    <ClCompile Include="DrawVertex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

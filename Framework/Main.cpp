@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Main.h"
 #include "Systems/Window.h"
+#include "DrawVertex.h"			// << :
 
 void Main::Initialize()
 {
-
+	Push(new DrawVertex());
 }
 
 void Main::Ready()
