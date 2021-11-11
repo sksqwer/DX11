@@ -6,10 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{B640DD8F-8898-4DD5-B881-129CE7985A55}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{FE0D7081-B8D9-42FA-B4C8-253DAD26D70C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B640DD8F-8898-4DD5-B881-129CE7985A55} = {B640DD8F-8898-4DD5-B881-129CE7985A55}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{95378D62-B2EF-455D-9352-0DF818D776CB}"
 	ProjectSection(SolutionItems) = preProject
 		..\_Shaders\001_Vertex.fx = ..\_Shaders\001_Vertex.fx
+		..\_Shaders\002_Rect.fx = ..\_Shaders\002_Rect.fx
+		..\_Shaders\003_World.fx = ..\_Shaders\003_World.fx
 	EndProjectSection
 EndProject
 Global

@@ -32,7 +32,7 @@ Context::Context()
 	viewport = new Viewport(desc.Width, desc.Height);
 
 
-	position = D3DXVECTOR3(29.5f, 16.5f, -50.0f);
+	position = D3DXVECTOR3(0.0f, 0.0f, -3.0f);
 	D3DXVECTOR3 forward(0, 0, 1);
 	D3DXVECTOR3 right(1, 0, 0);
 	D3DXVECTOR3 up(0, 1, 0);

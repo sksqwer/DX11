@@ -18,6 +18,10 @@ private:
 	//VertexShader, PixelShader
 	Shader* shader;
 
-	Vertex vertices[2];
+	Vertex vertices[6];
 	ID3D11Buffer* vertexBuffer;
+
+	Color color;
+
+	UINT number = 0;
 };
