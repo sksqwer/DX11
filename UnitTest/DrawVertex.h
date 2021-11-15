@@ -5,6 +5,10 @@
 class DrawVertex : public IExecute
 {
 public:
+
+	DrawVertex();
+	
+
 	virtual void Initialize() override;
 	virtual void Ready() override {};
 	virtual void Destroy() override;
@@ -18,8 +22,17 @@ private:
 	//VertexShader, PixelShader
 	Shader* shader;
 
-	Vertex vertices[6];
+	UINT width = 256;
+	UINT height = 256;
+
+	UINT vertexCount;
+
+	Vertex* vertices;
 	ID3D11Buffer* vertexBuffer;
+
+	UINT indexCount;
+	UINT* indices;
+	ID3D11Buffer* indexBuffer;
 
 	Color color;
 
