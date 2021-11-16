@@ -76,6 +76,12 @@
     <ClInclude Include="Renders\VertexLayouts.h">
       <Filter>Renders</Filter>
     </ClInclude>
+    <ClInclude Include="Viewer\Camera.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\FreeCam.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Viewer\Orthographic.cpp">
@@ -131,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="Renders\Texture.cpp">
       <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Camera.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\FreeCam.cpp">
+      <Filter>Viewer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
