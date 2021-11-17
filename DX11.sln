@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{95378D62-B2EF-455D-9352-0DF818D776CB}"
 	ProjectSection(SolutionItems) = preProject
 		..\_Shader\004_Quad.fx = ..\_Shader\004_Quad.fx
+		..\_Shaders\005_Texture.fx = ..\_Shaders\005_Texture.fx
 	EndProjectSection
 EndProject
 Global

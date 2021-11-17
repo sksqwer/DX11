@@ -24,12 +24,18 @@
     <ClInclude Include="DrawVertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DrawTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Framework\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DrawVertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
