@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Environments\Terrain.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Renders\Context.h" />
     <ClInclude Include="Renders\Shader.h" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Viewer\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Environments\Terrain.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
     <ClCompile Include="Renders\Shader.cpp" />
     <ClCompile Include="Renders\Texture.cpp" />

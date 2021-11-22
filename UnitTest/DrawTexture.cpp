@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "Stdafx.h"
 #include "DrawTexture.h"
 
 DrawTexture::DrawTexture()

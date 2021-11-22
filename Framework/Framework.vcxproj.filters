@@ -13,6 +13,9 @@
     <Filter Include="Viewer">
       <UniqueIdentifier>{9b9e8557-60b9-44ba-bc68-e3f131a2dca0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Environments">
+      <UniqueIdentifier>{a186d178-2154-42f8-8839-f8277512d53a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -82,6 +85,9 @@
     <ClInclude Include="Viewer\FreeCam.h">
       <Filter>Viewer</Filter>
     </ClInclude>
+    <ClInclude Include="Environments\Terrain.h">
+      <Filter>Environments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Viewer\Orthographic.cpp">
@@ -143,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="Viewer\FreeCam.cpp">
       <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Environments\Terrain.cpp">
+      <Filter>Environments</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

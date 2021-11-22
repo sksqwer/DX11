@@ -3,11 +3,13 @@
 #include "Systems/Window.h"
 #include "DrawVertex.h"			// << :
 #include "DrawTexture.h"			// << :
+#include "DrawTerrain.h"			// << :
 
 void Main::Initialize()
 {
 	//Push(new DrawVertex());
-	Push(new DrawTexture());
+	//Push(new DrawTexture());
+	Push(new DrawTerrain());
 }
 
 void Main::Ready()
