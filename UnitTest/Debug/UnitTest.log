@@ -1,2 +1,6 @@
-﻿  DrawVertex.cpp
+﻿  Main.cpp
+  DrawMesh.cpp
+  DrawTerrain.cpp
+  DrawTexture.cpp
+  DrawVertex.cpp
   UnitTest.vcxproj -> C:\Users\Admin\Documents\GitHub\DX11\Debug\UnitTest.exe

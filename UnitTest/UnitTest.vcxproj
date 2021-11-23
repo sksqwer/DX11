@@ -127,12 +127,14 @@
   <ItemGroup>
     <ClInclude Include="..\Framework\Main.h" />
     <ClInclude Include="..\Framework\Stdafx.h" />
+    <ClInclude Include="DrawMesh.h" />
     <ClInclude Include="DrawTerrain.h" />
     <ClInclude Include="DrawTexture.h" />
     <ClInclude Include="DrawVertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Framework\Main.cpp" />
+    <ClCompile Include="DrawMesh.cpp" />
     <ClCompile Include="DrawTerrain.cpp" />
     <ClCompile Include="DrawTexture.cpp" />
     <ClCompile Include="DrawVertex.cpp" />

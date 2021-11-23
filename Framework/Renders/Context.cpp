@@ -6,7 +6,6 @@ Context* Context::instance = NULL;
 Context * Context::Get()
 {
 	assert(instance != NULL);
-
 	return instance;
 }
 
@@ -29,6 +28,7 @@ Context::Context()
 	perspective = new Perspective(desc.Width, desc.Height);
 	viewport = new Viewport(desc.Width, desc.Height);
 	camera = new FreeCam();
+	lightDirection = Vector3(-1, -1, 1);
 }
 
 Context::~Context()

@@ -4,12 +4,14 @@
 #include "DrawVertex.h"			// << :
 #include "DrawTexture.h"			// << :
 #include "DrawTerrain.h"			// << :
+#include "DrawMesh.h"			// << :
 
 void Main::Initialize()
 {
 	//Push(new DrawVertex());
 	//Push(new DrawTexture());
-	Push(new DrawTerrain());
+	//Push(new DrawTerrain());
+	Push(new DrawMesh());
 }
 
 void Main::Ready()

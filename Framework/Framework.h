@@ -79,3 +79,6 @@ typedef D3DXQUATERNION Quaternion;
 #include "Utilities/Math.h"
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
+
+#include "Meshes/Mesh.h"
+#include "Meshes/MeshQuad.h"

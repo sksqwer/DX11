@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="Environments\Terrain.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="Meshes\Mesh.h" />
+    <ClInclude Include="Meshes\MeshQuad.h" />
     <ClInclude Include="Renders\Context.h" />
     <ClInclude Include="Renders\Shader.h" />
     <ClInclude Include="Renders\Texture.h" />
@@ -46,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Environments\Terrain.cpp" />
+    <ClCompile Include="Meshes\Mesh.cpp" />
+    <ClCompile Include="Meshes\MeshQuad.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
     <ClCompile Include="Renders\Shader.cpp" />
     <ClCompile Include="Renders\Texture.cpp" />
