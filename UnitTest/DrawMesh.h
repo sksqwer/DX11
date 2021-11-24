@@ -17,4 +17,7 @@ class DrawMesh : public IExecute
 private:
 	Shader* shader;
 	class MeshQuad* quad;
+
+	class MeshGrid* grid;
+	class MeshCube* cube;
 };

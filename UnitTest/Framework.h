@@ -82,3 +82,5 @@ typedef D3DXQUATERNION Quaternion;
 
 #include "Meshes/Mesh.h"
 #include "Meshes/MeshQuad.h"
+#include "Meshes/MeshGrid.h"
+#include "Meshes/MeshCube.h"
