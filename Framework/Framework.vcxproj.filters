@@ -103,6 +103,12 @@
     <ClInclude Include="Meshes\MeshCube.h">
       <Filter>Meshes</Filter>
     </ClInclude>
+    <ClInclude Include="Meshes\MeshCylinder.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\MeshSphere.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Viewer\Orthographic.cpp">
@@ -178,6 +184,12 @@
       <Filter>Meshes</Filter>
     </ClCompile>
     <ClCompile Include="Meshes\MeshCube.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\MeshCylinder.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\MeshSphere.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
   </ItemGroup>

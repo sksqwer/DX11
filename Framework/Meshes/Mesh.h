@@ -1,4 +1,5 @@
 #pragma once
+
 class Mesh
 {
 public:
@@ -8,35 +9,34 @@ public:
 	typedef VertexNormal MeshVertex;
 
 protected:
-	MeshVertex*			vertices;
-	UINT*			indices;
+	MeshVertex* vertices;
+	UINT* indices;
 
-	UINT			vertexCount;
-	UINT			indexCount;
+	UINT vertexCount;
+	UINT indexCount;
 
-	Shader*			shader;
+	D3DXCOLOR color;
 
-	D3DXCOLOR			color;
 private:
-	ID3D11Buffer*	vertexBuffer;
-	ID3D11Buffer*	indexBuffer;
+	ID3D11Buffer* vertexBuffer;
+	ID3D11Buffer* indexBuffer;
+	Shader* shader;
 
-	UINT			pass;
-	Vector3			position;
-	Vector3			scale;
-	Vector3			rotation;
+	UINT pass;
+	Vector3 position;
+	Vector3 scale;
+	Vector3 rotation;
 
-	D3DXMATRIX			world;
+	D3DXMATRIX world;
 
-	ID3DX11EffectMatrixVariable *sWorld, *sView, *sProjection;
-	ID3DX11EffectVectorVariable *sColor;
+	ID3DX11EffectMatrixVariable* sWorld, *sView, *sProjection;
+	ID3DX11EffectVectorVariable* sColor;
 
 public:
 	void Render();
 
-	Shader* GetShader() { return shader;}
+	Shader* GetShader() { return shader; }
 
-	//
 	void Position(float x, float y, float z);
 	void Position(D3DXVECTOR3& vec);
 	void Position(D3DXVECTOR3* vec);
@@ -66,6 +66,7 @@ protected:
 private:
 	void UpdateWorld();
 
-	
+
+
 };
 

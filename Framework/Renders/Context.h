@@ -17,7 +17,7 @@ public:
 
 	D3DXMATRIX View();// { return view; }
 	D3DXMATRIX Projection();
-	//Vector3& LightDirection;
+	Vector3& LightDirection() { return lightDirection; };
 
 	class Perspective* GetPerspective() { return perspective; }
 	class Viewport* GetViewport() { return viewport; }
