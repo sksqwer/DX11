@@ -47,6 +47,7 @@ void DrawMesh::Initialize()
 		sphere[i * 2 + 1]->Color(0, 0, 1);
 	}
 
+
 }
 
 void DrawMesh::Destroy()
@@ -65,9 +66,9 @@ void DrawMesh::Render()
 	ImGui::SliderFloat3("LightDirection", (float*)&direction, -1, 1);
 	shader->AsVector("LightDirection")->SetFloatVector(direction);
 
-	//quad->Render();
-	//grid->Render();
-	//cube->Render();
+	quad->Render();
+	grid->Render();
+	cube->Render();
 
 	for (UINT i = 0; i < 10; i++)
 	{

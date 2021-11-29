@@ -17,4 +17,7 @@ class DrawTerrain : public IExecute
 private:
 	Shader* shader;
 	class Terrain* terrain;
+
+	class MeshSphere* sphere;
+	Shader* sphereShader;
 };

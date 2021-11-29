@@ -33,6 +33,9 @@
     <ClInclude Include="DrawMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DrawTexture2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Framework\Main.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DrawMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawTexture2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

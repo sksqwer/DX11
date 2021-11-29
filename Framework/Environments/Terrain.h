@@ -7,7 +7,7 @@ public:
 	~Terrain();
 
 public:
-	typedef VertexNormal TerrainVertex;
+	typedef VertexTextureNormal TerrainVertex;
 
 private:
 	Shader * shader;
@@ -34,6 +34,12 @@ private:
 public:
 	void Update();
 	void Render();
+	void BaseMap(wstring file);
+	float  GetHeight(Vector3 position);
+private:
+	Texture*	baseMap;
+	ID3DX11EffectShaderResourceVariable *sBaseMap;
 
+	Vector2 spacing;
 };
 
