@@ -5,6 +5,7 @@
 #include "DrawTexture.h"			// << :
 #include "DrawTerrain.h"			// << :
 #include "DrawMesh.h"			// << :
+#include "DrawTexture2.h"
 
 void Main::Initialize()
 {
@@ -12,6 +13,7 @@ void Main::Initialize()
 	//Push(new DrawTexture());
 	//Push(new DrawTerrain());
 	Push(new DrawMesh());
+	Push(new DrawTexture2());
 }
 
 void Main::Ready()
