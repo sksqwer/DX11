@@ -1,5 +1,4 @@
 #pragma once
-
 class Terrain
 {
 public:
@@ -7,11 +6,11 @@ public:
 	~Terrain();
 
 public:
-	typedef VertexTextureNormal TerrainVertex;
+	typedef VertexTextureNormal   TerrainVertex;
 
 private:
-	Shader * shader;
-	Texture * heightMap;
+	Shader* shader;
+	Texture*   heightMap;
 	UINT width, height;
 
 	UINT vertexCount;
@@ -24,6 +23,7 @@ private:
 
 	UINT pass;
 
+	Matrix world;
 
 private:
 	void CreateVertexData();
@@ -35,11 +35,13 @@ public:
 	void Update();
 	void Render();
 	void BaseMap(wstring file);
-	float  GetHeight(Vector3 position);
+	float GetHeight(Vector3& position);
+	float GetPickedHeight(Vector3& position);
+	Vector3 GetPickedPosition();
+
 private:
-	Texture*	baseMap;
-	ID3DX11EffectShaderResourceVariable *sBaseMap;
+	Texture* baseMap;
+	ID3DX11EffectShaderResourceVariable* sBaseMap;
 
 	Vector2 spacing;
 };
-
