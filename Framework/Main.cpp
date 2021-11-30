@@ -11,9 +11,9 @@ void Main::Initialize()
 {
 	//Push(new DrawVertex());
 	//Push(new DrawTexture());
-	//Push(new DrawTerrain());
-	Push(new DrawMesh());
-	Push(new DrawTexture2());
+	Push(new DrawTerrain());
+	//Push(new DrawMesh());
+	//Push(new DrawTexture2());
 }
 
 void Main::Ready()

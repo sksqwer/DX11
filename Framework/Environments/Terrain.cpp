@@ -4,12 +4,15 @@
 Terrain::Terrain(Shader * shader, wstring heightmap)
 	: shader(shader)
 	, pass(0)
+	, baseMap(NULL)
+	, spacing(10, 10)
 {
 	this->heightMap = new Texture(heightmap);
 	CreateVertexData();
 	CreateIndexData();
 	CreateNormalData();
 	CreateBuffer();
+	sBaseMap = shader->AsSRV("BaseMap");
 }
 
 Terrain::~Terrain()
@@ -44,6 +47,10 @@ void Terrain::CreateVertexData()
 			//vertices[index].Position.y = heights[index].r * 255.0f / 10.0f; // 사진과 위아래 반전되어 나온다
 			vertices[index].Position.y = heights[pixel].r * 255.0f / 10.0f; //  사진과 똑같이 나온다
 			vertices[index].Position.z = (float)z;
+
+			vertices[index].Uv.x = (float)x / (float)width * spacing.x;
+			vertices[index].Uv.y = (float)(height - 1 - z) / (float)height * spacing.y;
+
 		}
 	}
 }
@@ -143,4 +150,51 @@ void Terrain::Render()
 	D3D::GetDC()->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	shader->DrawIndexed(0, pass, indexCount);
+}
+
+void Terrain::BaseMap(wstring file)
+{
+	SafeDelete(baseMap);
+
+	baseMap = new Texture(file);
+	sBaseMap->SetResource(baseMap->SRV());
+}
+
+float Terrain::GetHeight(Vector3 position)
+{
+	UINT x = (UINT)position.x;
+	UINT z = (UINT)position.z;
+
+	if (x <0 || x > width) return -1.0f;
+	if (z <0 || z > width) return -1.0f;
+
+	UINT index[4];
+	index[0] = width * (z + 0) + (x + 0);
+	index[1] = width * (z + 1) + (x + 0);
+	index[2] = width * (z + 0) + (x + 1);
+	index[3] = width * (z + 1) + (x + 1);
+
+	Vector3 v[4];
+
+	for(int i = 0; i<4; i++)
+	{
+		v[i] = vertices[index[i]].Position;
+	}
+
+	float ddx = (position.x - v[0].x) / 1.0f;
+	float ddz = (position.z - v[0].z) / 1.0f;
+
+	Vector3 temp;
+	if(ddx + ddz <= 1)
+	{
+		temp = v[0] + (v[2] - v[0]) * ddx + (v[1] - v[0]) * ddz;
+	}
+	else
+	{
+		ddx = 1 - ddx;
+		ddz = 1 - ddz;
+		temp = v[3] + (v[1] - v[3]) * ddx + (v[2] - v[3]) * ddz;
+	}
+
+	return temp.y;
 }
