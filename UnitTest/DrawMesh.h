@@ -16,10 +16,11 @@ class DrawMesh : public IExecute
 
 private:
 	Shader* shader;
-	class MeshQuad* quad;
 
+	class MeshQuad* quad;
 	class MeshGrid* grid;
 	class MeshCube* cube;
 	class MeshCylinder* cylinder[10];
 	class MeshSphere* sphere[10];
+
 };

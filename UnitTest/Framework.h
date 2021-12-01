@@ -64,17 +64,23 @@ typedef D3DXQUATERNION Quaternion;
 #include "Systems/Time.h"
 #include "Systems/Gui.h"
 
+#include "Buffers/VertexBuffer.h"
+#include "Buffers/IndexBuffer.h"
+#include "Buffers/ConstantBuffer.h"
+
 #include "Viewer/Viewport.h"
 #include "Viewer/Projection.h"
 #include "Viewer/Perspective.h"
 #include "Viewer/Orthographic.h"
 #include "Viewer/Camera.h"
-#include "Viewer/FreeCam.h"
 
 #include "Renders/Shader.h"
 #include "Renders/Texture.h"
 #include "Renders/VertexLayouts.h"
 #include "Renders/Context.h"
+#include "Renders/PerFrame.h"
+#include "Renders/Transform.h"
+#include "Renders/Renderer.h"
 
 #include "Utilities/Math.h"
 #include "Utilities/String.h"
@@ -86,3 +92,5 @@ typedef D3DXQUATERNION Quaternion;
 #include "Meshes/MeshCube.h"
 #include "Meshes/MeshCylinder.h"
 #include "Meshes/MeshSphere.h"
+
+#include "Environments/Terrain.h"

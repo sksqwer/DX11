@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DrawMesh.cpp" />
+    <ClCompile Include="DrawTerrain.cpp" />
+    <ClCompile Include="DrawTexture.cpp" />
+    <ClCompile Include="DrawTexture2.cpp" />
+    <ClCompile Include="DrawVertex.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DrawMesh.h" />
+    <ClInclude Include="DrawTerrain.h" />
+    <ClInclude Include="DrawTexture.h" />
+    <ClInclude Include="DrawTexture2.h" />
+    <ClInclude Include="DrawVertex.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Stdafx.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{FE0D7081-B8D9-42FA-B4C8-253DAD26D70C}</ProjectGuid>
@@ -124,23 +142,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Framework\Main.h" />
-    <ClInclude Include="..\Framework\Stdafx.h" />
-    <ClInclude Include="DrawMesh.h" />
-    <ClInclude Include="DrawTerrain.h" />
-    <ClInclude Include="DrawTexture.h" />
-    <ClInclude Include="DrawTexture2.h" />
-    <ClInclude Include="DrawVertex.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Framework\Main.cpp" />
-    <ClCompile Include="DrawMesh.cpp" />
-    <ClCompile Include="DrawTerrain.cpp" />
-    <ClCompile Include="DrawTexture.cpp" />
-    <ClCompile Include="DrawTexture2.cpp" />
-    <ClCompile Include="DrawVertex.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

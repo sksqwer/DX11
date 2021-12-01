@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffers\ConstantBuffer.h" />
+    <ClInclude Include="Buffers\IndexBuffer.h" />
+    <ClInclude Include="Buffers\VertexBuffer.h" />
     <ClInclude Include="Environments\Terrain.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Meshes\Mesh.h" />
@@ -28,8 +31,11 @@
     <ClInclude Include="Meshes\MeshQuad.h" />
     <ClInclude Include="Meshes\MeshSphere.h" />
     <ClInclude Include="Renders\Context.h" />
+    <ClInclude Include="Renders\PerFrame.h" />
+    <ClInclude Include="Renders\Renderer.h" />
     <ClInclude Include="Renders\Shader.h" />
     <ClInclude Include="Renders\Texture.h" />
+    <ClInclude Include="Renders\Transform.h" />
     <ClInclude Include="Renders\VertexLayouts.h" />
     <ClInclude Include="Systems\D3D.h" />
     <ClInclude Include="Systems\Gui.h" />
@@ -51,6 +57,9 @@
     <ClInclude Include="Viewer\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buffers\ConstantBuffer.cpp" />
+    <ClCompile Include="Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Environments\Terrain.cpp" />
     <ClCompile Include="Meshes\Mesh.cpp" />
     <ClCompile Include="Meshes\MeshCube.cpp" />
@@ -59,8 +68,11 @@
     <ClCompile Include="Meshes\MeshQuad.cpp" />
     <ClCompile Include="Meshes\MeshSphere.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
+    <ClCompile Include="Renders\PerFrame.cpp" />
+    <ClCompile Include="Renders\Renderer.cpp" />
     <ClCompile Include="Renders\Shader.cpp" />
     <ClCompile Include="Renders\Texture.cpp" />
+    <ClCompile Include="Renders\Transform.cpp" />
     <ClCompile Include="Systems\D3D.cpp" />
     <ClCompile Include="Systems\Gui.cpp" />
     <ClCompile Include="Systems\Keyboard.cpp" />

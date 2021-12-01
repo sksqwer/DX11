@@ -1,29 +1,20 @@
 #pragma once
-class Terrain
+class Terrain : public Renderer
 {
 public:
 	Terrain(Shader* shader, wstring heightmap);
 	~Terrain();
 
 public:
-	typedef VertexTextureNormal   TerrainVertex;
+	typedef VertexTextureNormal	TerrainVertex;
 
 private:
-	Shader* shader;
-	Texture*   heightMap;
+	Texture*	heightMap;
 	UINT width, height;
 
-	UINT vertexCount;
 	TerrainVertex* vertices;
-	ID3D11Buffer* vertexBuffer;
 
-	UINT indexCount;
 	UINT* indices;
-	ID3D11Buffer* indexBuffer;
-
-	UINT pass;
-
-	Matrix world;
 
 private:
 	void CreateVertexData();

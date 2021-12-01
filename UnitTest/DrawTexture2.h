@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Systems//IExecute.h"
+#include "Systems///IExecute.h"
 
 class DrawTexture2 : public IExecute
 {
@@ -14,12 +14,11 @@ class DrawTexture2 : public IExecute
 	virtual void PostRender() override {};
 	virtual void ResizeScreen() override {};
 
-
 private:
 	Shader* shader;
 
 	ID3D11Buffer* vertexBuffer;
 	ID3D11Buffer* indexBuffer;
-	Texture * texture;
 
+	Texture* texture;
 };

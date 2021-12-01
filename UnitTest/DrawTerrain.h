@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Systems//IExecute.h"
+#include "Systems///IExecute.h"
 
 class DrawTerrain : public IExecute
 {
@@ -17,7 +17,6 @@ class DrawTerrain : public IExecute
 private:
 	Shader* shader;
 	class Terrain* terrain;
-
 	class MeshSphere* sphere;
 	Shader* sphereShader;
 };

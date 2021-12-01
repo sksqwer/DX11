@@ -2,8 +2,7 @@
 #include "Terrain.h"
 
 Terrain::Terrain(Shader * shader, wstring heightmap)
-	: shader(shader)
-	, pass(1)
+	: Renderer(shader)
 	, baseMap(NULL)
 	, spacing(3, 3)
 {
@@ -13,7 +12,6 @@ Terrain::Terrain(Shader * shader, wstring heightmap)
 	CreateNormalData();
 	CreateBuffer();
 	sBaseMap = shader->AsSRV("BaseMap");
-	D3DXMatrixIdentity(&world);
 }
 
 Terrain::~Terrain()
@@ -22,9 +20,6 @@ Terrain::~Terrain()
 
 	SafeDeleteArray(vertices);
 	SafeDeleteArray(indices);
-
-	SafeRelease(vertexBuffer);
-	SafeRelease(indexBuffer);
 }
 
 void Terrain::CreateVertexData()
@@ -113,55 +108,19 @@ void Terrain::CreateNormalData()
 
 void Terrain::CreateBuffer()
 {
-#pragma region Vertex
-	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.ByteWidth = sizeof(TerrainVertex) * vertexCount;
-		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		D3D11_SUBRESOURCE_DATA data = { 0 };
-		data.pSysMem = vertices;
-		Check(D3D::GetDevice()->CreateBuffer(&desc, &data, &vertexBuffer));
-	}
-#pragma endregion
-
-#pragma region Index
-	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.ByteWidth = sizeof(UINT) * indexCount;
-		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		D3D11_SUBRESOURCE_DATA data = { 0 };
-		data.pSysMem = indices;
-		Check(D3D::GetDevice()->CreateBuffer(&desc, &data, &indexBuffer));
-	}
-#pragma endregion
-
+	vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(TerrainVertex));
+	indexBuffer = new IndexBuffer(indices, indexCount);
 }
 
 void Terrain::Update()
 {
-#pragma region World, View, Projection
-	// #. W V P
-	shader->AsMatrix("World")->SetMatrix(world);
-	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
-	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());
-#pragma endregion
+	Super::Update();
 }
 
 void Terrain::Render()
 {
-#pragma region Init
-	UINT stride = sizeof(TerrainVertex);
-	UINT offset = 0;
-
-	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-	D3D::GetDC()->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	shader->DrawIndexed(0, pass, indexCount);
-#pragma endregion
+	Super::Render();
+	shader->DrawIndexed(0, Pass(), indexCount);
 }
 
 void Terrain::BaseMap(wstring file)
@@ -265,7 +224,8 @@ Vector3 Terrain::GetPickedPosition()
 
 	//Context::Get()->GetViewport()->GetRay(&start, &direction, world, V, P);
 
-	Vector3  mouse = Mouse::Get()->GetPosition();
+	Matrix world = GetTransform()->World();
+	Vector3 mouse = Mouse::Get()->GetPosition();
 	Vector3 n, f;
 	mouse.z = 0.0f;
 	Context::Get()->GetViewport()->Unproject(&n, mouse, world, V, P);

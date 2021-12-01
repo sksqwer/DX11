@@ -1,14 +1,10 @@
 #pragma once
 
-#include "Systems//IExecute.h"
+#include "Systems///IExecute.h"
 
 class DrawTexture : public IExecute
 {
-public:
-
-	DrawTexture();
-	
-
+	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Ready() override {};
 	virtual void Destroy() override;
@@ -19,14 +15,12 @@ public:
 	virtual void ResizeScreen() override {};
 
 private:
-	//VertexShader, PixelShader
 	Shader* shader;
 
 	UINT width = 256;
 	UINT height = 256;
 
 	UINT vertexCount = 4;
-
 	Vertex* vertices;
 	ID3D11Buffer* vertexBuffer;
 
@@ -37,7 +31,8 @@ private:
 	ID3D11ShaderResourceView* srv;
 	Texture* texture;
 
-	Color color;
+	//Color color;
 
-	UINT number = 0;
+	//int number;
+	// Input Assembly -> Vertex Shader -> Teccelation -> H -> D -> G -> Render(Rester) (2D) -> Pixel Shader -> OM
 };

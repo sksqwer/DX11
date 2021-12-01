@@ -19,9 +19,11 @@
     <Filter Include="Meshes">
       <UniqueIdentifier>{bee2b431-f4dd-4b4e-89e5-6bb3db0ff15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Buffers">
+      <UniqueIdentifier>{f2eb9d98-d8a1-44be-99f5-dadf72393a62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Framework.h" />
     <ClInclude Include="Viewer\Orthographic.h">
       <Filter>Viewer</Filter>
     </ClInclude>
@@ -109,6 +111,25 @@
     <ClInclude Include="Meshes\MeshSphere.h">
       <Filter>Meshes</Filter>
     </ClInclude>
+    <ClInclude Include="Buffers\ConstantBuffer.h">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffers\IndexBuffer.h">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffers\VertexBuffer.h">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\PerFrame.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\Renderer.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\Transform.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Viewer\Orthographic.cpp">
@@ -191,6 +212,24 @@
     </ClCompile>
     <ClCompile Include="Meshes\MeshSphere.cpp">
       <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffers\ConstantBuffer.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffers\IndexBuffer.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffers\VertexBuffer.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\PerFrame.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\Renderer.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\Transform.cpp">
+      <Filter>Renders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

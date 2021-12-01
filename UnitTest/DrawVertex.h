@@ -1,14 +1,10 @@
 #pragma once
 
-#include "Systems//IExecute.h"
+#include "Systems///IExecute.h"
 
 class DrawVertex : public IExecute
 {
-public:
-
-	DrawVertex();
-	
-
+	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Ready() override {};
 	virtual void Destroy() override;
@@ -19,22 +15,24 @@ public:
 	virtual void ResizeScreen() override {};
 
 private:
-	//VertexShader, PixelShader
 	Shader* shader;
 
 	UINT width = 256;
 	UINT height = 256;
 
-	UINT vertexCount;
-
+	UINT vertexCount = 4;
 	Vertex* vertices;
 	ID3D11Buffer* vertexBuffer;
 
-	UINT indexCount;
+	UINT indexCount = 6;
 	UINT* indices;
 	ID3D11Buffer* indexBuffer;
 
-	Color color;
+	ID3D11ShaderResourceView* srv;
+	Texture* texture;
 
-	UINT number = 0;
+	//Color color;
+
+	//int number;
+	// Input Assembly -> Vertex Shader -> Teccelation -> H -> D -> G -> Render(Rester) (2D) -> Pixel Shader -> OM
 };

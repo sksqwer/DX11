@@ -1,31 +1,33 @@
 #include "stdafx.h"
 #include "DrawMesh.h"
 #include "Viewer/FreeCam.h"
-#include "Environments/Terrain.h"
-
 
 void DrawMesh::Initialize()
 {
 	((FreeCam*)Context::Get()->GetCamera())->Speed(40, 2);
-	Context::Get()->GetCamera()->RotationDegree(10, 0, 0);
-	Context::Get()->GetCamera()->Position(0, 0, -20);
+	Context::Get()->GetCamera()->RotationDegree(20, 0, 0);
+	Context::Get()->GetCamera()->Position(0, 40, -90);
 
 	shader = new Shader(L"007_Mesh.fx");
 
+	// #. Quad
 	quad = new MeshQuad(shader);
 
+	// #. Grid
 	grid = new MeshGrid(shader);
 	grid->Position(0, 0, 0);
 	grid->Scale(20, 1, 20);
 	grid->Color(1, 1, 1);
 
+	// #. Cube
 	cube = new MeshCube(shader);
-	cube->Position(0, 5, 0);
+	cube->Position(0, 5, 5);
 	cube->Scale(20, 10, 20);
 	cube->Color(1, 0, 0);
 
 	for (UINT i = 0; i < 5; i++)
 	{
+		// #. Cylinder
 		cylinder[i * 2] = new MeshCylinder(shader, 0.5f, 3.0f, 20, 20);
 		cylinder[i * 2]->Position(-30, 6, -15.0f + (float)i * 15.0f);
 		cylinder[i * 2]->Scale(5, 5, 5);
@@ -36,6 +38,7 @@ void DrawMesh::Initialize()
 		cylinder[i * 2 + 1]->Scale(5, 5, 5);
 		cylinder[i * 2 + 1]->Color(0, 1, 0);
 
+		// #. Sphere
 		sphere[i * 2] = new MeshSphere(shader, 0.5f, 20, 20);
 		sphere[i * 2]->Position(-30, 15.5f, -15.0f + (float)i * 15.0f);
 		sphere[i * 2]->Scale(5, 5, 5);
@@ -46,13 +49,11 @@ void DrawMesh::Initialize()
 		sphere[i * 2 + 1]->Scale(5, 5, 5);
 		sphere[i * 2 + 1]->Color(0, 0, 1);
 	}
-
-
 }
 
 void DrawMesh::Destroy()
 {
-
+	SafeDelete(shader);
 }
 
 void DrawMesh::Update()
@@ -62,11 +63,14 @@ void DrawMesh::Update()
 
 void DrawMesh::Render()
 {
+	Gui::Get()->RenderText(100, 100, 1, 0, 0, "Test");
+
+
 	Vector3& direction = Context::Get()->LightDirection();
 	ImGui::SliderFloat3("LightDirection", (float*)&direction, -1, 1);
 	shader->AsVector("LightDirection")->SetFloatVector(direction);
 
-	quad->Render();
+	//quad->Render();
 	grid->Render();
 	cube->Render();
 
