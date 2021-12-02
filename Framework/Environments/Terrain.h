@@ -42,6 +42,8 @@ public:
 	float GetPickedHeight(Vector3& position);
 	Vector3 GetPickedPosition();
 
+	void RaiseHeight(Vector3 & position, UINT type, UINT range);
+
 private:
 	Texture* baseMap;
 	ID3DX11EffectShaderResourceVariable* sBaseMap;

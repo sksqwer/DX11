@@ -112,7 +112,7 @@ void Terrain::CreateNormalData()
 
 void Terrain::CreateBuffer()
 {
-	vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(TerrainVertex));
+	vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(TerrainVertex), 0, true, false);
 	indexBuffer = new IndexBuffer(indices, indexCount);
 }
 
@@ -126,10 +126,15 @@ void Terrain::Update()
 	ImGui::ColorEdit3("Brush Color", (float*)&brushDesc.Color);
 	ImGui::InputInt("Brush Range", (int*)&brushDesc.Range);
 
-	if(brushDesc.Type > 0)
+	if (brushDesc.Type > 0)
 	{
 		Vector3 position = GetPickedPosition();
 		brushDesc.Location = position;
+
+		if (Mouse::Get()->Press(0))
+		{
+			RaiseHeight(position, brushDesc.Type, brushDesc.Range);
+		}
 
 	}
 }
@@ -291,4 +296,47 @@ Vector3 Terrain::GetPickedPosition()
 	}
 
 	return Vector3(-1, -1, -1);
+}
+
+void Terrain::RaiseHeight(Vector3& position, UINT type, UINT range)
+{
+	D3D11_BOX box;
+
+	box.left = (UINT)position.x - range;
+	box.top = (UINT)position.z + range;
+	box.right = (UINT)position.x + range;
+	box.bottom = (UINT)position.z - range;
+
+	if (box.left < 0) box.left = 0;
+	if (box.top >= height) box.top = height;
+	if (box.right >= width) box.right = width;
+	if (box.bottom < 0) box.bottom = 0;
+
+	for (UINT z = box.bottom; z <= box.top; z++)
+	{
+		for (UINT x = box.left; x <= box.right; x++)
+		{
+			UINT index = width * z + x;
+			vertices[index].Position.y += 5.0f * Time::Delta();
+		}
+	}
+	CreateNormalData();
+
+
+	//D3D::GetDC()->UpdateSubresource(vertexBuffer->Buffer(),
+	//	0,
+	//	NULL,
+	//	vertices,
+	//	sizeof(TerrainVertex) * vertexCount,
+	//	0);
+
+	D3D11_MAPPED_SUBRESOURCE subresource;
+	D3D::GetDC()->Map(vertexBuffer->Buffer(),
+	0,
+	D3D11_MAP_WRITE_DISCARD,
+	0,
+		&subresource);
+	memcpy(subresource.pData, vertices, sizeof(TerrainVertex) * vertexCount);
+	D3D::GetDC()->Unmap(vertexBuffer->Buffer(), 0);
+
 }
