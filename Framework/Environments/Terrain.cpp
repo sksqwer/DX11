@@ -12,11 +12,15 @@ Terrain::Terrain(Shader * shader, wstring heightmap)
 	CreateNormalData();
 	CreateBuffer();
 	sBaseMap = shader->AsSRV("BaseMap");
+
+	brushBuffer = new ConstantBuffer(&brushDesc, sizeof(BrushDesc));
+	sBrushBuffer = shader->AsConstantBuffer("CB_TerrainBrush");
 }
 
 Terrain::~Terrain()
 {
 	SafeDelete(heightMap);
+	SafeDelete(brushBuffer);
 
 	SafeDeleteArray(vertices);
 	SafeDeleteArray(indices);
@@ -115,11 +119,30 @@ void Terrain::CreateBuffer()
 void Terrain::Update()
 {
 	Super::Update();
-}
 
+	ImGui::InputInt("Brush Type", (int*)&brushDesc.Type);
+	brushDesc.Type %= 3;
+
+	ImGui::ColorEdit3("Brush Color", (float*)&brushDesc.Color);
+	ImGui::InputInt("Brush Range", (int*)&brushDesc.Range);
+
+	if(brushDesc.Type > 0)
+	{
+		Vector3 position = GetPickedPosition();
+		brushDesc.Location = position;
+
+	}
+}
 void Terrain::Render()
 {
 	Super::Render();
+
+	if (sBrushBuffer != NULL)
+	{
+		brushBuffer->Apply();
+		sBrushBuffer->SetConstantBuffer(brushBuffer->Buffer());
+	}
+
 	shader->DrawIndexed(0, Pass(), indexCount);
 }
 

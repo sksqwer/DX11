@@ -12,6 +12,18 @@ private:
 	Texture*	heightMap;
 	UINT width, height;
 
+	struct BrushDesc
+	{
+		Color Color = D3DXCOLOR(0, 1, 0, 1);
+		Vector3 Location;
+		UINT Type = 0;
+		UINT Range = 1;
+		float Padding[3];
+	} brushDesc;
+
+	ConstantBuffer* brushBuffer;
+	ID3DX11EffectConstantBuffer* sBrushBuffer;
+
 	TerrainVertex* vertices;
 
 	UINT* indices;
