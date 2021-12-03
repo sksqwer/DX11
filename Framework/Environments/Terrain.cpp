@@ -15,6 +15,9 @@ Terrain::Terrain(Shader * shader, wstring heightmap)
 
 	brushBuffer = new ConstantBuffer(&brushDesc, sizeof(BrushDesc));
 	sBrushBuffer = shader->AsConstantBuffer("CB_TerrainBrush");
+
+	LineColorBuffer = new ConstantBuffer(&lineColorDesc, sizeof(LineColorDesc));
+	sLineColorBuffer = shader->AsConstantBuffer("CB_GridLine");
 }
 
 Terrain::~Terrain()
@@ -30,10 +33,29 @@ void Terrain::CreateVertexData()
 {
 #pragma region Vertex
 	vector<Color> heights;
-	heightMap->ReadPixels(DXGI_FORMAT_R8G8B8A8_UNORM, &heights);
+	heightMap->ReadPixel(DXGI_FORMAT_R8G8B8A8_UNORM, &heights);
 
 	width = heightMap->GetWidth();
 	height = heightMap->GetHeight();
+
+	{
+		FILE* file = fopen("Test.csv", "w");
+		for(UINT y = 0; y < height; y++)
+		{
+			for (UINT x = 0; x < width; x++)
+			{
+				UINT index = width * y + x;
+
+				float r = (UINT)(heights[index].r * 255);
+				float g = (UINT)(heights[index].g * 255);
+				float b = (UINT)(heights[index].b * 255);
+				float a = (UINT)(heights[index].a * 255);
+				fprintf(file, "%d, %d, %d, %d, %d, %d, %d\n",
+					index, x, y, (UINT)r, (UINT)g, (UINT)b, (UINT)a);
+			}
+		}
+		fclose(file);
+	}
 
 	vertexCount = width * height;
 	vertices = new TerrainVertex[vertexCount];
@@ -46,7 +68,7 @@ void Terrain::CreateVertexData()
 			UINT pixel = width * (height - 1 - z) + x;
 			vertices[index].Position.x = (float)x;
 			//vertices[index].Position.y = heights[index].r * 255.0f / 10.0f;
-			vertices[index].Position.y = heights[pixel].r * 255.0f / 10.0f;
+			vertices[index].Position.y = 0;
 			vertices[index].Position.z = (float)z;
 
 			vertices[index].Uv.x = ((float)x / (float)width) * spacing.x;
@@ -120,11 +142,18 @@ void Terrain::Update()
 {
 	Super::Update();
 
+	// :
 	ImGui::InputInt("Brush Type", (int*)&brushDesc.Type);
 	brushDesc.Type %= 3;
 
 	ImGui::ColorEdit3("Brush Color", (float*)&brushDesc.Color);
 	ImGui::InputInt("Brush Range", (int*)&brushDesc.Range);
+
+	// :
+	ImGui::Separator();
+	ImGui::ColorEdit3("Brush Color2", (float*)&lineColorDesc.Color);
+	ImGui::InputFloat("Thickness", &lineColorDesc.Thickness, 0.1f);
+	ImGui::InputFloat("Size", &lineColorDesc.Size, 1.0f);
 
 	if (brushDesc.Type > 0)
 	{
@@ -146,6 +175,12 @@ void Terrain::Render()
 	{
 		brushBuffer->Apply();
 		sBrushBuffer->SetConstantBuffer(brushBuffer->Buffer());
+	}
+
+	if (sLineColorBuffer != NULL)
+	{
+		LineColorBuffer->Apply();
+		sLineColorBuffer->SetConstantBuffer(LineColorBuffer->Buffer());
 	}
 
 	shader->DrawIndexed(0, Pass(), indexCount);

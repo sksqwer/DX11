@@ -21,8 +21,21 @@ private:
 		float Padding[3];
 	} brushDesc;
 
+	struct LineColorDesc
+	{
+		Color			Color = D3DXCOLOR(1, 1, 1, 1);
+		UINT			Visible = 1;
+		float			Thickness = 0.1f;
+		float			Size = 1;
+		float			Padding;
+	} lineColorDesc;
+
+
 	ConstantBuffer* brushBuffer;
 	ID3DX11EffectConstantBuffer* sBrushBuffer;
+
+	ConstantBuffer* LineColorBuffer;
+	ID3DX11EffectConstantBuffer* sLineColorBuffer;
 
 	TerrainVertex* vertices;
 

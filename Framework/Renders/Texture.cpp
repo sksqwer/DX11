@@ -37,6 +37,64 @@ void Texture::SaveFile(wstring file)
 	SaveFile(file, srcTexture);
 }
 
+D3D11_TEXTURE2D_DESC Texture::ReadPixel(DXGI_FORMAT readFormat, vector<Color>* pixels)
+{
+	ID3D11Texture2D* srcTexture;
+	view->GetResource((ID3D11Resource**)&srcTexture);
+	return ReadPixel(srcTexture, readFormat, pixels);
+}
+
+D3D11_TEXTURE2D_DESC Texture::ReadPixel(ID3D11Texture2D* src, DXGI_FORMAT readFormat, vector<Color>* pixels)
+{
+	D3D11_TEXTURE2D_DESC srcDesc;
+	src->GetDesc(&srcDesc);
+
+	D3D11_TEXTURE2D_DESC desc;
+	ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
+	desc.Width = srcDesc.Width;
+	desc.Height = srcDesc.Height;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.Format = readFormat;
+	desc.SampleDesc = srcDesc.SampleDesc;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+	desc.Usage = D3D11_USAGE_STAGING;
+
+	// :
+	ID3D11Texture2D* texture;
+	Check(D3D::GetDevice()->CreateTexture2D(&desc, NULL, &texture));
+
+	Check(D3DX11LoadTextureFromTexture(D3D::GetDC(), src, NULL, texture));
+
+	UINT* colors = new UINT[desc.Width * desc.Height];
+	D3D11_MAPPED_SUBRESOURCE subResource;
+	D3D::GetDC()->Map(texture, 0, D3D11_MAP_READ, NULL, &subResource);
+	memcpy(colors, subResource.pData, sizeof(UINT) * desc.Width * desc.Height);
+	D3D::GetDC()->Unmap(texture, 0);
+
+	for(UINT y = 0; y < desc.Height; y++)
+	{
+		for(UINT x = 0; x < desc.Width; x++)
+		{
+			UINT index = desc.Width * y + x;
+
+			CONST FLOAT f = 1.0f / 255.0f;
+			float r = f * (float)((0xFF000000 & colors[index]) >> 24);
+			float g = f * (float)((0x00FF0000 & colors[index]) >> 16);
+			float b = f * (float)((0x0000FF00 & colors[index]) >> 8);
+			float a = f * (float)((0x000000FF & colors[index]) >> 0);
+			pixels->push_back(D3DXCOLOR(a, b, g,r));
+		}
+	}
+
+	SafeDeleteArray(colors);
+	SafeRelease(texture);
+	return desc;
+
+
+
+}
+
 void Texture::SaveFile(wstring file, ID3D11Texture2D * src)
 {
 	D3D11_TEXTURE2D_DESC srcDesc;

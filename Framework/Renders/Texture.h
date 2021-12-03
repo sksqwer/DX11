@@ -36,6 +36,14 @@ private:
 
 	DirectX::TexMetadata metaData;
 	ID3D11ShaderResourceView* view;
+
+public:
+	D3D11_TEXTURE2D_DESC ReadPixel(DXGI_FORMAT readFormat, vector<Color>* pixels);
+	static D3D11_TEXTURE2D_DESC ReadPixel(
+											ID3D11Texture2D* src, 
+											DXGI_FORMAT readFormat,
+											vector<Color>* pixels
+										);
 };
 
 struct TextureDesc

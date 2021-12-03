@@ -1,37 +1,11 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-  ConstantBuffer.cpp
-  IndexBuffer.cpp
-  VertexBuffer.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(376,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
   Terrain.cpp
-  Mesh.cpp
-  MeshCube.cpp
-  MeshCylinder.cpp
-  MeshGrid.cpp
-  MeshQuad.cpp
-  MeshSphere.cpp
-  Context.cpp
-  PerFrame.cpp
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  Transform.cpp
-  D3D.cpp
-  Gui.cpp
-  Keyboard.cpp
-  Mouse.cpp
-  Time.cpp
-  Window.cpp
-  BinaryFile.cpp
-  Math.cpp
-  Path.cpp
-  String.cpp
-  Xml.cpp
-  Camera.cpp
-  FreeCam.cpp
-  Orthographic.cpp
-  Perspective.cpp
-  Projection.cpp
-  Viewport.cpp
-  Framework.vcxproj -> C:\Users\Admin\Documents\GitHub\DX11\Debug\Framework.lib
+c:\github\directx9\dx11\framework\environments\terrain.cpp(49): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+c:\github\directx9\dx11\framework\environments\terrain.cpp(50): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+c:\github\directx9\dx11\framework\environments\terrain.cpp(51): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+c:\github\directx9\dx11\framework\environments\terrain.cpp(52): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+c:\github\directx9\dx11\framework\environments\terrain.cpp(42): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.22000.0\ucrt\stdio.h(213): note: see declaration of 'fopen'
+  Framework.vcxproj -> C:\GitHub\DirectX9\DX11\Debug\Framework.lib
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
