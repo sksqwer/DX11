@@ -27,6 +27,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{95
 		..\_Shaders\010_Terrain.fx = ..\_Shaders\010_Terrain.fx
 		..\_Shaders\011_Terrain.fx = ..\_Shaders\011_Terrain.fx
 		..\_Shaders\012_TerrainGridLine.fx = ..\_Shaders\012_TerrainGridLine.fx
+		..\_Shaders\013_Terrain_Splatting.fx = ..\_Shaders\013_Terrain_Splatting.fx
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelExport", "ModelExport\ModelExport.vcxproj", "{8B413AFB-4C4D-4616-8379-7F95C1378B7D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B640DD8F-8898-4DD5-B881-129CE7985A55} = {B640DD8F-8898-4DD5-B881-129CE7985A55}
 	EndProjectSection
 EndProject
 Global
@@ -53,6 +59,14 @@ Global
 		{FE0D7081-B8D9-42FA-B4C8-253DAD26D70C}.Release|x64.Build.0 = Release|x64
 		{FE0D7081-B8D9-42FA-B4C8-253DAD26D70C}.Release|x86.ActiveCfg = Release|Win32
 		{FE0D7081-B8D9-42FA-B4C8-253DAD26D70C}.Release|x86.Build.0 = Release|Win32
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Debug|x64.ActiveCfg = Debug|x64
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Debug|x64.Build.0 = Debug|x64
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Debug|x86.ActiveCfg = Debug|Win32
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Debug|x86.Build.0 = Debug|Win32
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Release|x64.ActiveCfg = Release|x64
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Release|x64.Build.0 = Release|x64
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Release|x86.ActiveCfg = Release|Win32
+		{8B413AFB-4C4D-4616-8379-7F95C1378B7D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

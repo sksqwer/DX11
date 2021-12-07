@@ -163,8 +163,10 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)Debug\Framework.lib" "$(SolutionDir)UnitTest\
-copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)UnitTest\</Command>
+      <Command>copy /Y "$(SolutionDir)Debug\Framework.lib" "$(SolutionDir)Unitest\"
+copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)Unitest\"
+copy /Y "$(SolutionDir)Debug\Framework.lib" "$(SolutionDir)ModelExport\"
+copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)ModelExport\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -196,6 +198,12 @@ copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)UnitTest\</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)Debug\Framework.lib" "$(SolutionDir)Unitest\"
+copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)Unitest\"
+copy /Y "$(SolutionDir)Debug\Framework.lib" "$(SolutionDir)ModelExport\"
+copy /Y "$(SolutionDir)Debug\Framework.pdb" "$(SolutionDir)ModelExport\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

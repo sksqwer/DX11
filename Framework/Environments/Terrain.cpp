@@ -5,6 +5,8 @@ Terrain::Terrain(Shader * shader, wstring heightmap)
 	: Renderer(shader)
 	, baseMap(NULL)
 	, spacing(3, 3)
+	, layerMap(NULL)
+	, alphaMap(NULL)
 {
 	this->heightMap = new Texture(heightmap);
 	CreateVertexData();
@@ -12,6 +14,8 @@ Terrain::Terrain(Shader * shader, wstring heightmap)
 	CreateNormalData();
 	CreateBuffer();
 	sBaseMap = shader->AsSRV("BaseMap");
+	sLayerMap = shader->AsSRV("LayerMap");
+	sAlphaMap = shader->AsSRV("AlphaMap");
 
 	brushBuffer = new ConstantBuffer(&brushDesc, sizeof(BrushDesc));
 	sBrushBuffer = shader->AsConstantBuffer("CB_TerrainBrush");
@@ -67,12 +71,12 @@ void Terrain::CreateVertexData()
 			UINT index = width * z + x;
 			UINT pixel = width * (height - 1 - z) + x;
 			vertices[index].Position.x = (float)x;
-			//vertices[index].Position.y = heights[index].r * 255.0f / 10.0f;
-			vertices[index].Position.y = 0;
+			vertices[index].Position.y = heights[index].r * 255.0f / 10.0f;
+			//vertices[index].Position.y = 0;
 			vertices[index].Position.z = (float)z;
 
-			vertices[index].Uv.x = ((float)x / (float)width) * spacing.x;
-			vertices[index].Uv.y = ((float)(height - 1 - z) / (float)height) * spacing.y;
+			vertices[index].Uv.x = ((float)x / (float)width);
+			vertices[index].Uv.y = ((float)(height - 1 - z) / (float)height);
 		}
 	}
 #pragma endregion
@@ -192,6 +196,18 @@ void Terrain::BaseMap(wstring file)
 
 	baseMap = new Texture(file);
 	sBaseMap->SetResource(baseMap->SRV());
+}
+
+void Terrain::LayerMap(wstring layer, wstring alpha)
+{
+	SafeDelete(layerMap);
+	SafeDelete(alphaMap);
+
+	layerMap = new Texture(layer);
+	alphaMap = new Texture(alpha);
+
+	sLayerMap->SetResource(layerMap->SRV());
+	sAlphaMap->SetResource(alphaMap->SRV());
 }
 
 float Terrain::GetHeight(Vector3& position)

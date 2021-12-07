@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "Stdafx.h"
 #include "DrawTerrain.h"
 #include "Environments/Terrain.h"
 #include "Viewer/FreeCam.h"
@@ -6,10 +6,12 @@
 void DrawTerrain::Initialize()
 {
 	((FreeCam*)Context::Get()->GetCamera())->Speed(60, 10);
-	shader = new Shader(L"012_TerrainGridLine.fx");
-	//terrain = new Terrain(shader, L"HeightMap/HeightMapTest.png");
-	terrain = new Terrain(shader, L"Test2.png");
+	//shader = new Shader(L"012_TerrainGridLine.fx");
+	shader = new Shader(L"013_Terrain_Splatting.fx");
+	terrain = new Terrain(shader, L"HeightMap/HeightMapTest.png");
 	terrain->BaseMap(L"Terrain/Dirt.png");
+
+	terrain->LayerMap(L"Terrain/Grass (Lawn).jpg", L"HeightMap/AlphaMap256.png");
 }
 
 void DrawTerrain::Destroy()
