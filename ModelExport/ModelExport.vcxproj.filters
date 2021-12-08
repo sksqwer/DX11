@@ -44,5 +44,8 @@
     <ClInclude Include="Assimp\Loader.h">
       <Filter>Assimp</Filter>
     </ClInclude>
+    <ClInclude Include="Assimp\Type.h">
+      <Filter>Assimp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

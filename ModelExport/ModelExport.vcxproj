@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assimp\Loader.h" />
+    <ClInclude Include="Assimp\Type.h" />
     <ClInclude Include="Export.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Main.h" />

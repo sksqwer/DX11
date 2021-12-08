@@ -14,4 +14,8 @@ class Export : public IExecute
 	virtual void PostRender() override {};
 	virtual void ResizeScreen() override {};
 
+private:
+	void Tank();
+	void Tower();
+
 };
