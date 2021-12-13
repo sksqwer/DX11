@@ -1,4 +1,4 @@
-#include "Stdafx.h"
+#include "stdafx.h"
 #include "Loader.h"
 #include "Type.h"
 #include "Utilities/Xml.h"
@@ -6,25 +6,23 @@
 
 Loader::Loader()
 {
-	importer = new Assimp::Importer;
+	importer = new Assimp::Importer();
 }
 
 Loader::~Loader()
 {
-	SafeDelete(importer)
+	SafeDelete(importer);
 }
 
 void Loader::ReadFile(wstring file)
 {
 	this->file = L"../../_Assets/" + file;
-	scene = importer->ReadFile(
-		String::ToString(this->file),
+	scene = importer->ReadFile(String::ToString(this->file),
 		aiProcess_ConvertToLeftHanded
 		| aiProcess_Triangulate
 		| aiProcess_GenUVCoords
 		| aiProcess_GenNormals
-		| aiProcess_CalcTangentSpace
-		);
+		| aiProcess_CalcTangentSpace);
 	assert(scene != NULL);
 }
 
@@ -32,64 +30,23 @@ void Loader::ExportMaterial(wstring savePath, bool bOverwrite)
 {
 	savePath = L"../../_Textures/" + savePath + L".material";
 	ReadMaterial();
-
 	WriteMaterial(savePath, bOverwrite);
 }
 
 void Loader::ExportMesh(wstring savePath, bool bOverwrite)
 {
-	savePath = L"../../_Models/" + savePath + L".Mesh";
+	savePath = L"../../_Models/" + savePath + L".mesh";
 	ReadBoneData(scene->mRootNode, -1, -1);
-	
 	WriteMeshData(savePath, bOverwrite);
-}
-
-void Loader::ReadBoneData(aiNode* node, int index, int parent)
-{
-	AsBone* bone = new AsBone();
-	bone->Index = index;
-	bone->Parent = parent;
-	bone->Name = node->mName.C_Str();
-
-	Matrix transform(node->mTransformation[0]);
-
-	D3DXMatrixTranspose(&bone->Transform, &transform);
-
-	Matrix temp;
-	if (parent == -1)
-		D3DXMatrixIdentity(&temp);
-	else
-		temp = bones[parent]->Transform;
-
-	bone->Transform = bone->Transform*temp;
-	bones.push_back(bone);
-
-	ReadMeshData(node, index);
-
-	for(UINT i = 0; i < node->mNumChildren; i++)
-	{
-		ReadBoneData(node->mChildren[i], bones.size(), index);
-	}
-
-}
-
-void Loader::ReadMeshData(aiNode* node, int index)
-{
-}
-
-void Loader::WriteMeshData(wstring savePath, bool bOverwrite)
-{
 }
 
 void Loader::ReadMaterial()
 {
-	for(UINT i = 0; i < scene->mNumMaterials; i++)
+	for (UINT i = 0; i < scene->mNumMaterials; i++)
 	{
 		aiMaterial* readMaterial = scene->mMaterials[i];
 		AsMaterial* material = new AsMaterial();
 		material->Name = readMaterial->GetName().C_Str();
-
-		//int breakpoint = 999;
 
 		float val;
 		aiColor3D color;
@@ -106,7 +63,6 @@ void Loader::ReadMaterial()
 		readMaterial->Get(AI_MATKEY_SHININESS, material->Specular.a);
 
 		aiString file;
-
 		readMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &file);
 		material->DiffuseFile = file.C_Str();
 
@@ -117,17 +73,14 @@ void Loader::ReadMaterial()
 		material->NormalFile = file.C_Str();
 
 		materials.push_back(material);
-
-
-		SafeDelete(readMaterial)
 	}
 }
 
-void Loader::WriteMaterial(wstring savePath, bool bOverwirte)
+void Loader::WriteMaterial(wstring savePath, bool bOverwrite)
 {
-	if(!bOverwirte)
+	if (bOverwrite == false)
 	{
-		if (Path::ExistFile(savePath))
+		if (Path::ExistFile(savePath) == true)
 			return;
 	}
 
@@ -137,14 +90,13 @@ void Loader::WriteMaterial(wstring savePath, bool bOverwirte)
 	Path::CreateFolders(folder);
 
 	Xml::XMLDocument* document = new Xml::XMLDocument();
-	Xml::XMLDeclaration * decl = document->NewDeclaration();
+	Xml::XMLDeclaration* decl = document->NewDeclaration();
 	document->LinkEndChild(decl);
 
 	Xml::XMLElement* root = document->NewElement("Materials");
 	root->SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 	root->SetAttribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
 	document->LinkEndChild(root);
-
 
 	for (AsMaterial* material : materials)
 	{
@@ -175,7 +127,6 @@ void Loader::WriteMaterial(wstring savePath, bool bOverwirte)
 		element->SetAttribute("A", material->Ambient.a);
 		node->LinkEndChild(element);
 
-
 		element = document->NewElement("Diffuse");
 		element->SetAttribute("R", material->Diffuse.r);
 		element->SetAttribute("G", material->Diffuse.g);
@@ -183,22 +134,15 @@ void Loader::WriteMaterial(wstring savePath, bool bOverwirte)
 		element->SetAttribute("A", material->Diffuse.a);
 		node->LinkEndChild(element);
 
-
 		element = document->NewElement("Specular");
 		element->SetAttribute("R", material->Specular.r);
 		element->SetAttribute("G", material->Specular.g);
 		element->SetAttribute("B", material->Specular.b);
 		element->SetAttribute("A", material->Specular.a);
 		node->LinkEndChild(element);
-
-		SafeDelete(material);
 	}
 
-
 	document->SaveFile((folder + file).c_str());
-
-
-
 }
 
 string Loader::WriteTexture(string savePath, string file)
@@ -211,10 +155,10 @@ string Loader::WriteTexture(string savePath, string file)
 
 	string path = "";
 
-	if(texture != NULL)
+	if (texture != NULL)
 	{
 		path = savePath + Path::GetFileNameWithoutExtension(file) + ".png";
-		if(texture->mHeight < 1)
+		if (texture->mHeight < 1)
 		{
 			BinaryWriter w;
 			w.Open(String::ToWString(path));
@@ -241,7 +185,7 @@ string Loader::WriteTexture(string savePath, string file)
 			hr = D3D::GetDevice()->CreateTexture2D(&destDesc, &subResource, &dest);
 			assert(SUCCEEDED(hr));
 
-			D3DX11SaveTextureToFileA(D3D::GetDC(), dest, 
+			D3DX11SaveTextureToFileA(D3D::GetDC(), dest,
 				D3DX11_IFF_PNG, savePath.c_str());
 		}
 	}
@@ -257,9 +201,138 @@ string Loader::WriteTexture(string savePath, string file)
 		path = savePath + fileName;
 		CopyFileA(origin.c_str(), path.c_str(), FALSE);
 		String::Replace(&path, "../../_Textures/", "");
-		
+	}
+	return Path::GetFileName(path);
+}
+
+void Loader::ReadBoneData(aiNode * node, int index, int parent)
+{
+	AsBone* bone = new AsBone();
+	bone->Index = index;
+	bone->Parent = parent;
+	bone->Name = node->mName.C_Str();
+
+	Matrix transform(node->mTransformation[0]);
+	D3DXMatrixTranspose(&bone->Transform, &transform);
+
+	Matrix temp;
+	if (parent == -1)
+		D3DXMatrixIdentity(&temp);
+	else
+		temp = bones[parent]->Transform;
+
+	bone->Transform = bone->Transform*temp;
+	bones.push_back(bone);
+
+	ReadMeshData(node, index);
+
+	for (UINT i = 0; i < node->mNumChildren; i++)
+		ReadBoneData(node->mChildren[i], bones.size(), index);
+}
+
+void Loader::ReadMeshData(aiNode * node, int bone)
+{
+	if (node->mNumMeshes < 1) return;
+
+	AsMesh* asMesh = new AsMesh();
+	asMesh->Name = node->mName.C_Str();
+	asMesh->BondIndex = bone;
+
+	for (UINT i = 0; i < node->mNumMeshes; i++)
+	{
+		UINT index = node->mMeshes[i];
+		aiMesh* mesh = scene->mMeshes[index];
+
+		UINT startVertex = asMesh->Vertices.size();
+		UINT startIndex = asMesh->Indices.size();
+
+		// #. Vertex
+		for (UINT m = 0; m < mesh->mNumVertices; m++)
+		{
+			Model::ModelVertex vertex;
+			memcpy(&vertex.Position, &mesh->mVertices[m], sizeof(Vector3));
+			memcpy(&vertex.Uv, &mesh->mTextureCoords[0][m], sizeof(Vector2));
+			memcpy(&vertex.Normal, &mesh->mNormals[m], sizeof(Vector3));
+			asMesh->Vertices.push_back(vertex);
+		}
+
+		// #. Index
+		for (UINT f = 0; f < mesh->mNumFaces; f++)
+		{
+			aiFace& face = mesh->mFaces[f];
+			for (UINT k = 0; k < face.mNumIndices; k++)
+			{
+				asMesh->Indices.push_back(face.mIndices[k]);
+				asMesh->Indices.back() += startIndex;
+			}
+		}
+
+		AsMeshPart* meshPart = new AsMeshPart();
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		meshPart->Name = mesh->mName.C_Str();
+		meshPart->MaterialName = material->GetName().C_Str();
+		meshPart->StartVertex = startVertex;
+		meshPart->StartIndex = startIndex;
+		meshPart->VertexCount = mesh->mNumVertices;
+		meshPart->IndexCount = mesh->mNumFaces * mesh->mFaces->mNumIndices;
+
+		asMesh->MeshParts.push_back(meshPart);
 	}
 
-	return Path::GetFileName(path);
+	meshes.push_back(asMesh);
+}
 
+void Loader::WriteMeshData(wstring savePath, bool bOverwrite)
+{
+	if (bOverwrite == false)
+	{
+		if (Path::ExistFile(savePath) == true)
+			return;
+	}
+	Path::CreateFolders(Path::GetDirectoryName(savePath));
+
+	BinaryWriter* w = new BinaryWriter();
+	w->Open(savePath);
+
+	w->UInt(bones.size());
+	for (AsBone* bone : bones)
+	{
+		w->Int(bone->Index);
+		w->String(bone->Name);
+		w->Int(bone->Parent);
+		w->Matrix(bone->Transform);
+		SafeDelete(bone);
+	}
+
+	w->UInt(meshes.size());
+	for (AsMesh* meshData : meshes)
+	{
+		w->String(meshData->Name);
+		w->Int(meshData->BondIndex);
+
+		w->UInt(meshData->Vertices.size());
+		w->Byte(&meshData->Vertices[0], sizeof(Model::ModelVertex) * meshData->Vertices.size());
+
+		w->UInt(meshData->Indices.size());
+		w->Byte(&meshData->Indices[0], sizeof(UINT) * meshData->Indices.size());
+
+		w->UInt(meshData->MeshParts.size());
+
+		// #. MeshPart
+		for (AsMeshPart* part : meshData->MeshParts)
+		{
+			w->String(part->Name);
+			w->String(part->MaterialName);
+
+			w->UInt(part->StartVertex);
+			w->UInt(part->VertexCount);
+
+			w->UInt(part->StartIndex);
+			w->UInt(part->IndexCount);
+
+			SafeDelete(part);
+		}
+
+		SafeDelete(meshData);
+	}
 }

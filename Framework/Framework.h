@@ -81,10 +81,13 @@ typedef D3DXQUATERNION Quaternion;
 #include "Renders/PerFrame.h"
 #include "Renders/Transform.h"
 #include "Renders/Renderer.h"
+#include "Renders/Material.h"
 
 #include "Utilities/Math.h"
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
+
+#include "Model/Model.h"
 
 #include "Meshes/Mesh.h"
 #include "Meshes/MeshQuad.h"

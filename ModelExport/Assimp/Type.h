@@ -1,6 +1,5 @@
 #pragma once
-
-#include "Stdafx.h"
+#include "stdafx.h"
 
 struct AsMaterial
 {
@@ -21,6 +20,28 @@ struct AsBone
 
 	int Parent;
 	Matrix Transform;
+};
 
+struct AsMeshPart
+{
+	string Name;
+	string MaterialName;
 
+	UINT StartVertex;
+	UINT VertexCount;
+
+	UINT StartIndex;
+	UINT IndexCount;
+};
+
+struct AsMesh
+{
+	string Name;
+	int BondIndex;
+
+	aiMesh* Mesh;
+	
+	vector<Model::ModelVertex> Vertices;
+	vector<UINT> Indices;
+	vector<AsMeshPart*> MeshParts;
 };

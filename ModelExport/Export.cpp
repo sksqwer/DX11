@@ -1,4 +1,4 @@
-#include "Stdafx.h"
+#include "stdafx.h"
 #include "Export.h"
 #include "Assimp/Loader.h"
 
@@ -14,8 +14,7 @@ void Export::Tank()
 	loader->ReadFile(L"Tank/Tank.fbx");
 	loader->ExportMaterial(L"Tank/Tank");
 	loader->ExportMesh(L"Tank/Tank");
-
-	SafeDelete(loader)
+	SafeDelete(loader);
 }
 
 void Export::Tower()
@@ -24,6 +23,5 @@ void Export::Tower()
 	loader->ReadFile(L"Tower/Tower.fbx");
 	loader->ExportMaterial(L"Tower/Tower");
 	loader->ExportMesh(L"Tower/Tower");
-
-	SafeDelete(loader)
+	SafeDelete(loader);
 }
